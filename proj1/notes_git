@@ -1,0 +1,10 @@
+git clone #website
+username is the same 
+token is :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
+after doing all the change do
+
+git add .
+git commit -m "something"
+git push origin HEAD:main
+
+
