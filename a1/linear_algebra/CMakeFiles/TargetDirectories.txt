@@ -1,3 +1,3 @@
-/home/trainingbot131/a1/linear_algebra/CMakeFiles/rebuild_cache.dir
-/home/trainingbot131/a1/linear_algebra/CMakeFiles/edit_cache.dir
-/home/trainingbot131/a1/linear_algebra/CMakeFiles/linear_solve_test.exe.dir
+/home/testinf/Transferring-files/a1/linear_algebra/CMakeFiles/rebuild_cache.dir
+/home/testinf/Transferring-files/a1/linear_algebra/CMakeFiles/linear_solve_test.exe.dir
+/home/testinf/Transferring-files/a1/linear_algebra/CMakeFiles/edit_cache.dir

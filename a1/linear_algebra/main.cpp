@@ -1,32 +1,59 @@
 #include "LinearSolverInterface.hpp"
-
+#include <stdlib.h>
+#include <vector>
 
 using namespace math8650;
+
+void testing_func(int n);
 
 int main()
 {
 
-  auto A = std::make_shared<DenseMatrix>(3,3);
-  auto b = std::make_shared<DenseVector>(3);
-  auto x = std::make_shared<DenseVector>(3);
+    std::vector<int> ns = {10,20,40,80,160,320};
+    
+    std::vector<int> nb = {1000, 2000, 3000};
+    
+    for (auto n:ns){
+     
+        //input clock.
+        testing_func(n);
+        
+    }
+  
+}
 
-  (*A)(0,0) = 1.0;
-  (*A)(0,1) = 2.0;
-  (*A)(0,2) = 2.0;
+void testing_func(int n){
+    
+    
+  auto A = std::make_shared<DenseMatrix>(n,n);
+  
+  auto A_s = std::make_shared<SymmetricMatrix>(n,n);
+  auto A_td = std::make_shared<TridiagonalMatrix>(n,n);
+  auto A_tg = std::make_shared<TriangleMatrix>(n,n);
+  
+  
+  auto b = std::make_shared<DenseVector>(n);
+  auto x = std::make_shared<DenseVector>(n);
 
-  (*A)(1,0) = 3.0;
-  (*A)(1,1) = 2.0;
-  (*A)(1,2) = 9.0;
-
-  (*A)(2,0) = 0.0;
-  (*A)(2,1) = 2.0;
-  (*A)(2,2) = 1.0;
-
-  (*b)(0) = 1.0;
-  (*b)(1) = 2.0;
-  (*b)(2) = 3.0;
-
+  for (int i(0); i < n; i++){
+      for (int j(0); j < n; j++){
+          double temp = rand();
+          (*A)(i,j) = temp;
+          (*A_s)(i,j) = temp;
+          if (i == j || j == i+1 || j == i-1){
+              (*A_td)(i,j) = temp;
+          }
+          if (j <= i){
+              (*A_tg)(i,j) = temp;
+          }
+      }
+      double temp2 = rand();
+      (*b)(i) = temp2;
+  }
+  
   LinearSolverInterface::solveSystemBiCG(A,b,x);
-  std::cout << *x << std::endl;
-
+  LinearSolverInterface::solveSystemBiCG(A_s,b,x);
+  LinearSolverInterface::solveSystemBiCG(A_td,b,x);
+  LinearSolverInterface::solveSystemBiCG(A_tg,b,x);
+  
 }
